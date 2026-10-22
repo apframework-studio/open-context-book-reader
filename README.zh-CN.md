@@ -11,6 +11,16 @@
 - **精选笔记**：每条保留原文位置，区分作者观点、理解、同意或质疑、待查证点；附少量闭卷问题。
 - **本地提取包**：从 PDF、EPUB、TXT、Markdown、HTML 生成 `source.md` 和 `manifest.json`。PDF 内嵌批注可提取；阅读平台另外导出的划线或笔记可作为伴随材料交给 Skill 核对。
 
+## 安装到 Codex
+
+```bash
+mkdir -p ~/.agents/skills
+git clone https://github.com/apframework-studio/open-context-book-reader.git ~/.agents/skills/open-context-book-reader
+python3 -m pip install -r ~/.agents/skills/open-context-book-reader/requirements.txt
+```
+
+Codex 可从 `~/.agents/skills` 发现此 Skill。使用时输入 `$open-context-book-reader`，或直接描述非虚构图书阅读任务。依赖需要安装到运行提取脚本的 Python 环境中。
+
 ## 使用
 
 将此仓库作为 Skill 使用，入口为 [SKILL.md](SKILL.md)。例如：“用 open-context-book-reader 阅读这本 EPUB，给我读前定位、章节关系和带位置的笔记。” 也可仅给书名或目录请求初步定位。
@@ -18,8 +28,7 @@
 独立使用提取器：
 
 ```bash
-python3 -m pip install -r requirements.txt
-python3 scripts/extract_book.py /path/to/book.epub --output /path/outside/repo/book-package
+python3 ~/.agents/skills/open-context-book-reader/scripts/extract_book.py /path/to/book.epub --output /path/outside/repo/book-package
 ```
 
 输出目录必须不存在。提取包会包含原文全文，应保存在使用者选择的仓库外目录，不要提交到本仓库。依赖按输入格式使用：TXT/Markdown 仅需 Python；HTML 需 Beautiful Soup；EPUB 再需 EbookLib；PDF 需 PyMuPDF。扫描件需要另备 OCR 文本，图片和复杂版式需要人工核查。

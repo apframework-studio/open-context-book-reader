@@ -3,7 +3,7 @@
 ## 最小工作流
 
 ```bash
-python3 scripts/extract_book.py /path/to/book.epub --output /path/outside/skill/book-package
+python3 /path/to/open-context-book-reader/scripts/extract_book.py /path/to/book.epub --output /path/outside/skill/book-package
 ```
 
 输出目录必须尚不存在，且位于 skill 仓库之外。脚本只读取输入，写 `source.md` 和 `manifest.json`。`source.md` 每个单元前有原文位置注释；`manifest.json` 记录源文件 SHA-256、元数据、警告、原文位置与归一化文件行号。源文件及大量原文不要提交到 skill 仓库。分析时可用 `source.md#L42`，同时保留原书定位。
